@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Music, Users, CalendarDays, ArrowRight } from "lucide-react";
 import { getEvents, getServices, getPhotos, EventData, ServiceData, PhotoData } from "@/lib/api";
 
@@ -28,7 +29,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-sir-black/60" aria-hidden="true"></div>
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           <h1 className="font-display font-bold text-5xl md:text-6xl mb-6">
-            SIR Ancorense
+            SIRAncorense
           </h1>
           <p className="text-sir-light text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
             Sociedade de Instrução e Recreio Ancorense — Uma instituição dedicada à cultura, música e recreação em Âncora desde 1974.
@@ -87,7 +88,7 @@ export default async function Home() {
               Secções da Sociedade
             </h2>
             <p className="text-sir-medium text-lg">
-              Conheça os grupos e atividades que dão vida à SIR Ancorense.
+              Conheça os grupos e atividades que dão vida à SIRAncorense.
             </p>
           </div>
 
@@ -96,9 +97,11 @@ export default async function Home() {
               <div key={seccao.id} className="bg-sir-light rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
                 <div className="aspect-video w-full overflow-hidden bg-sir-black flex items-center justify-center">
                   {seccao.image ? (
-                    <img 
-                      src={`/storage/${seccao.image}`} 
-                      alt={seccao.title} 
+                    <Image
+                      src={`/storage/${seccao.image}`}
+                      alt={seccao.title}
+                      width={400}
+                      height={225}
                       className="w-full h-full object-cover"
                     />
                   ) : null}
@@ -131,14 +134,16 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {fotos.map((foto) => (
-              <div 
-                key={foto.id} 
+              <div
+                key={foto.id}
                 className="group relative aspect-square overflow-hidden rounded-lg bg-sir-white shadow-sm cursor-pointer"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={foto.url} 
-                  alt={foto.legenda} 
+                <Image
+                  src={foto.url}
+                  alt={foto.legenda}
+                  width={400}
+                  height={400}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-sir-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">

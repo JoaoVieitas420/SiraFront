@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { X } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 
@@ -32,9 +33,11 @@ export default function GalleryGrid({ fotos }: { fotos: Foto[] }) {
             }`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image 
               src={foto.url} 
               alt={foto.legenda} 
+              width={idx === 0 ? 800 : 400}
+              height={idx === 0 ? 450 : 400}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             
@@ -60,9 +63,11 @@ export default function GalleryGrid({ fotos }: { fotos: Foto[] }) {
               className="group relative aspect-square overflow-hidden rounded-lg bg-sir-light shadow-sm cursor-pointer"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
+              <Image 
                 src={foto.url} 
                 alt={foto.legenda} 
+                width={400}
+                height={400}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-sir-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
@@ -109,9 +114,11 @@ export default function GalleryGrid({ fotos }: { fotos: Foto[] }) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image 
               src={selectedFoto.url} 
               alt={selectedFoto.legenda} 
+              width={1200}
+              height={800}
               className="w-auto h-auto max-w-full max-h-[80vh] object-contain rounded-md shadow-2xl"
             />
             <div className="mt-6 text-center">
