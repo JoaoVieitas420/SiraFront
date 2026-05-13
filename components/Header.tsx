@@ -5,10 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
-export function Header() {
+interface HeaderProps {
+  pages?: { title: string; slug: string }[];
+}
+
+export function Header({ pages = [] }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  const baseLinks = [
     { name: "Home", href: "/" },
     { name: "Sobre", href: "/sobre" },
     { name: "Secções", href: "/seccoes" },
@@ -17,6 +21,20 @@ export function Header() {
     { name: "Notícias", href: "/noticias" },
     { name: "Contactos", href: "/contactos" },
   ];
+
+  // Filter out pages that are already in baseLinks (by slug)
+  // Also exclude "inicio" which is Home
+  const dynamicLinks = pages
+    .filter(page => 
+      !baseLinks.some(link => link.href === `/${page.slug}`) && 
+      page.slug !== 'inicio'
+    )
+    .map(page => ({
+      name: page.title,
+      href: `/${page.slug}`
+    }));
+
+  const navLinks = [...baseLinks, ...dynamicLinks];
 
   return (
     <header className="sticky top-0 z-50 w-full bg-sir-white border-b border-sir-light shadow-sm">
