@@ -3,7 +3,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 export interface EventData {
   id: number;
   title: string;
+  slug: string;
   description: string;
+  image: string | null;
+  image_small?: string;
+  image_medium?: string;
   date: string;
   time: string;
   location: string;
@@ -60,6 +64,18 @@ export async function getEvents(): Promise<EventData[]> {
   } catch (error) {
     console.error('Error fetching events:', error);
     return [];
+  }
+}
+
+export async function getEventBySlug(slug: string): Promise<EventData | null> {
+  try {
+    const res = await fetch(`${API_URL}/events?slug=${slug}`, { next: { revalidate: 60 } });
+    if (!res.ok) return null;
+    const events = await res.json();
+    return events.find((e: EventData) => e.slug === slug) || null;
+  } catch (error) {
+    console.error('Error fetching event by slug:', error);
+    return null;
   }
 }
 
@@ -186,6 +202,11 @@ export interface InfoImageBlockData {
   image_alt?: string;
 }
 
+export interface ContactFormBlockData {
+  heading?: string;
+  description?: string;
+}
+
 export type PageBlock =
   | { type: 'hero'; data: HeroBlockData }
   | { type: 'text'; data: TextBlockData }
@@ -197,7 +218,8 @@ export type PageBlock =
   | { type: 'latest_posts'; data: LatestPostsBlockData }
   | { type: 'info_grid'; data: InfoGridBlockData }
   | { type: 'map'; data: MapBlockData }
-  | { type: 'info_image'; data: InfoImageBlockData };
+  | { type: 'info_image'; data: InfoImageBlockData }
+  | { type: 'contact_form'; data: ContactFormBlockData };
 
 
 
@@ -238,23 +260,23 @@ export async function getPage(slug: string): Promise<PageData | null> {
  */
 export function getResizedImageUrl(path: string | null | undefined, size: 'small' | 'medium'): string {
   if (!path) return '';
-  
+
   // If it's already a full URL, we can't easily guess the resized version unless we know the pattern
   // But for our local storage paths (e.g. "photos/abc.jpg")
   if (path.startsWith('http')) {
-      // If it's from our own API, it might already have the suffix if passed from virtual attributes
-      // But for blocks, we might need to inject it.
-      if (path.includes('_small.') || path.includes('_medium.')) return path;
-      
-      const parts = path.split('.');
-      const ext = parts.pop();
-      return `${parts.join('.')}_${size}.${ext}`;
+    // If it's from our own API, it might already have the suffix if passed from virtual attributes
+    // But for blocks, we might need to inject it.
+    if (path.includes('_small.') || path.includes('_medium.')) return path;
+
+    const parts = path.split('.');
+    const ext = parts.pop();
+    return `${parts.join('.')}_${size}.${ext}`;
   }
 
   const parts = path.split('.');
   const ext = parts.pop();
   const base = parts.join('.');
-  
+
   return `/storage/${base}_${size}.${ext}`;
 }
 

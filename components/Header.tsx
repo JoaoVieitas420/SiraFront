@@ -13,7 +13,7 @@ export function Header({ pages = [] }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const baseLinks = [
-    { name: "Home", href: "/" },
+    { name: "Início", href: "/" },
     { name: "Sobre", href: "/sobre" },
     { name: "Secções", href: "/seccoes" },
     { name: "Galeria", href: "/galeria" },
@@ -25,8 +25,8 @@ export function Header({ pages = [] }: HeaderProps) {
   // Filter out pages that are already in baseLinks (by slug)
   // Also exclude "inicio" which is Home
   const dynamicLinks = pages
-    .filter(page => 
-      !baseLinks.some(link => link.href === `/${page.slug}`) && 
+    .filter(page =>
+      !baseLinks.some(link => link.href === `/${page.slug}`) &&
       page.slug !== 'inicio'
     )
     .map(page => ({

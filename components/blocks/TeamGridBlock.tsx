@@ -8,7 +8,7 @@ export async function TeamGridBlock({ data }: { data: TeamGridBlockData }) {
   return (
     <section className="bg-sir-white py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display font-bold text-4xl text-sir-black mb-12">
+        <h2 className="text-center font-display font-bold text-4xl text-sir-black mb-12">
           {data.heading}
         </h2>
 

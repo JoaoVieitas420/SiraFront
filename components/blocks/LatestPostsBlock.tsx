@@ -47,9 +47,9 @@ export async function LatestPostsBlock({ data }: { data: LatestPostsBlockData })
               <div className="mt-6 pt-6 border-t border-sir-light">
                 <Link
                   href={`/noticias/${post.slug}`}
-                  className="inline-flex text-sir-black font-semibold hover:text-sir-medium transition-colors"
+                  className="inline-flex items-center px-6 py-2 bg-sir-black text-sir-white font-semibold rounded-md hover:bg-sir-dark transition-colors uppercase tracking-wider text-xs"
                 >
-                  Ler artigo completo &rarr;
+                  Ler artigo completo
                 </Link>
               </div>
             </div>

@@ -25,12 +25,12 @@ export default function GalleryGrid({ fotos }: { fotos: Foto[] }) {
   return (
     <div>
       {/* Fotos em Destaque */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8">
         {featured.map((foto, idx) => (
           <div
             key={foto.id}
             onClick={() => setSelectedFoto(foto)}
-            className={`group relative overflow-hidden rounded-lg bg-sir-light shadow-sm cursor-pointer ${idx === 0 ? 'md:col-span-2 md:row-span-2 aspect-video md:aspect-auto min-h-[300px]' : 'aspect-square'
+            className={`group relative overflow-hidden rounded-lg bg-sir-light shadow-sm cursor-pointer w-full ${idx === 0 ? 'col-span-2 md:col-span-2 md:row-span-2 aspect-video md:aspect-auto md:min-h-[400px]' : 'col-span-1 aspect-square'
               }`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -58,12 +58,12 @@ export default function GalleryGrid({ fotos }: { fotos: Foto[] }) {
 
       {/* Resto das Fotos */}
       {showAll && remaining.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
           {remaining.map((foto) => (
             <div
               key={foto.id}
               onClick={() => setSelectedFoto(foto)}
-              className="group relative aspect-square overflow-hidden rounded-lg bg-sir-light shadow-sm cursor-pointer"
+              className="group relative aspect-square overflow-hidden rounded-lg bg-sir-light shadow-sm cursor-pointer col-span-1"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <Image
