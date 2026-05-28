@@ -16,7 +16,6 @@ export default async function Noticias() {
 
   return (
     <>
-      {/* @ts-expect-error async server component */}
       <BlockRenderer blocks={page.content} />
     </>
   );
