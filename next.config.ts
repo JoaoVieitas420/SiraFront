@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 
+const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'https://sira-backend-7zre.onrender.com';
+
 const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'sira-backend-7zre.onrender.com',
+        port: '',
+        pathname: '/storage/**',
+      },
       {
         protocol: 'http',
         hostname: 'localhost',
@@ -16,27 +24,27 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/admin/:path*',
-        destination: 'http://localhost:8000/admin/:path*',
+        destination: `${backendUrl}/admin/:path*`,
       },
       {
         source: '/livewire/:path*',
-        destination: 'http://localhost:8000/livewire/:path*',
+        destination: `${backendUrl}/livewire/:path*`,
       },
       {
         source: '/filament/:path*',
-        destination: 'http://localhost:8000/filament/:path*',
+        destination: `${backendUrl}/filament/:path*`,
       },
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/api/:path*',
+        destination: `${backendUrl}/api/:path*`,
       },
       {
         source: '/storage/:path*',
-        destination: 'http://localhost:8000/storage/:path*',
+        destination: `${backendUrl}/storage/:path*`,
       },
       {
         source: '/public/:path*',
-        destination: 'http://localhost:8000/public/:path*',
+        destination: `${backendUrl}/public/:path*`,
       },
     ];
   },
