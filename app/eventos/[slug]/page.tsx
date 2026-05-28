@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, MapPin, Clock } from "lucide-react";
+import { HeroBlock } from "@/components/blocks/HeroBlock";
 
 export async function generateStaticParams() {
     const events = await getEvents();
@@ -28,35 +29,31 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         });
     };
 
+    // Nova função para formatar a hora apenas para HH:MM
+    const formatTime = (timeStr: string) => {
+        if (!timeStr) return "";
+
+        // Se a API já devolver uma string de hora (ex: "14:30:00" ou "14:30")
+        if (timeStr.includes(":")) {
+            return timeStr.slice(0, 5); // Corta e mantém apenas os primeiros 5 caracteres (HH:MM)
+        }
+
+        // Caso a API devolva uma string de data/hora completa (ISO)
+        const date = new Date(timeStr);
+        return date.toLocaleTimeString("pt-PT", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    };
+
     return (
         <>
-            {/* Hero Section - Matching News Style */}
-            <section
-                className="relative text-sir-white py-24 md:py-32 bg-cover bg-center"
-                style={{ backgroundImage: "url('/siraBg.jpg')" }}
-            >
-                <div className="absolute inset-0 bg-sir-black/70" aria-hidden="true" />
-                <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="flex justify-start mb-12">
-                        <Link
-                            href="/eventos"
-                            className="inline-flex items-center px-6 py-2 bg-transparent text-sir-white font-semibold rounded-md border-2 border-sir-white hover:bg-white/10 transition-colors uppercase tracking-wider text-xs"
-                        >
-                            Voltar para os Eventos
-                        </Link>
-                    </div>
-                    <h1 className="font-display font-bold text-4xl md:text-6xl mb-6 leading-tight">
-                        {event.title}
-                    </h1>
-                    <div className="flex items-center justify-center gap-4 text-sir-light/80">
-                        <span className="w-8 h-px bg-sir-light/30"></span>
-                        <p className="font-medium uppercase tracking-wider text-sm">
-                            {event.category}
-                        </p>
-                        <span className="w-8 h-px bg-sir-light/30"></span>
-                    </div>
-                </div>
-            </section>
+            {/* Hero Section */}
+            <HeroBlock
+                title={event.title}
+                subtitle={event.category}
+                backLink={{ href: "/eventos", label: "Voltar para os Eventos" }}
+            />
 
             {/* Content Section */}
             <section className="bg-sir-white py-20 flex-1">
@@ -114,7 +111,8 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                                         </div>
                                         <div>
                                             <p className="text-xs font-bold text-sir-medium uppercase tracking-widest mb-1">Hora</p>
-                                            <p className="text-sir-black font-semibold text-lg">{event.time}</p>
+                                            {/* Aplicada a nova função de formatação aqui */}
+                                            <p className="text-sir-black font-semibold text-lg">{formatTime(event.time)}</p>
                                         </div>
                                     </div>
 

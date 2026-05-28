@@ -34,6 +34,10 @@ const nextConfig: NextConfig = {
         source: '/storage/:path*',
         destination: 'http://localhost:8000/storage/:path*',
       },
+      {
+        source: '/public/:path*',
+        destination: 'http://localhost:8000/public/:path*',
+      },
     ];
   },
 };

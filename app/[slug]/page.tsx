@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return { title: "Página não encontrada" };
 
   return {
-    title: `${page.title} — SIR Ancorense`,
-    description: `Página ${page.title} do site SIR Ancorense`,
+    title: `${page.title} — SIRA`,
+    description: `Página ${page.title} do site SIRA`,
   };
 }
 
@@ -33,7 +33,6 @@ export default async function DynamicPage({ params }: Props) {
 
   return (
     <>
-      {/* @ts-expect-error async server component */}
       <BlockRenderer blocks={page.content} />
     </>
   );

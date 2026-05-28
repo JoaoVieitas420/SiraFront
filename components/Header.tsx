@@ -12,7 +12,7 @@ interface HeaderProps {
 export function Header({ pages = [] }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const baseLinks = [
+  const baseLinks: { name: string; href: string; external?: boolean }[] = [
     { name: "Início", href: "/" },
     { name: "Sobre", href: "/sobre" },
     { name: "Secções", href: "/seccoes" },
@@ -20,6 +20,7 @@ export function Header({ pages = [] }: HeaderProps) {
     { name: "Eventos", href: "/eventos" },
     { name: "Notícias", href: "/noticias" },
     { name: "Contactos", href: "/contactos" },
+    { name: "Sócios", href: "https://admin.sira.pt/login/registarsocio/", external: true },
   ];
 
   // Filter out pages that are already in baseLinks (by slug)
@@ -31,7 +32,8 @@ export function Header({ pages = [] }: HeaderProps) {
     )
     .map(page => ({
       name: page.title,
-      href: `/${page.slug}`
+      href: `/${page.slug}`,
+      external: false
     }));
 
   const navLinks = [...baseLinks, ...dynamicLinks];
@@ -44,20 +46,32 @@ export function Header({ pages = [] }: HeaderProps) {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center gap-3 font-display font-bold text-2xl text-sir-black">
               <Image src="/logo_sira.jpg" alt="Logo SIR Ancorense" width={40} height={40} className="rounded-full object-cover" />
-              SIRAncorense
+              SIRA
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sir-dark hover:text-sir-black font-medium transition-colors"
-              >
-                {link.name}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sir-dark hover:text-sir-black font-medium transition-colors"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-sir-dark hover:text-sir-black font-medium transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -84,14 +98,27 @@ export function Header({ pages = [] }: HeaderProps) {
         <div className="md:hidden bg-sir-white border-t border-sir-light">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-sir-dark hover:text-sir-black hover:bg-sir-light transition-colors"
-              >
-                {link.name}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-sir-dark hover:text-sir-black hover:bg-sir-light transition-colors"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-sir-dark hover:text-sir-black hover:bg-sir-light transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
         </div>

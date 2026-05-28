@@ -10,6 +10,10 @@ function formatDate(dateStr: string) {
   });
 }
 
+function stripHtml(html: string) {
+  return html.replace(/<[^>]*>/g, "");
+}
+
 export async function LatestPostsBlock({ data }: { data: LatestPostsBlockData }) {
   const allPosts = await getPosts();
   const posts = allPosts.slice(0, data.count ?? 5);
@@ -41,7 +45,7 @@ export async function LatestPostsBlock({ data }: { data: LatestPostsBlockData })
               </div>
               <div className="text-sir-dark leading-relaxed">
                 <p>
-                  {post.summary || post.content.substring(0, 150) + "..."}
+                  {post.summary || stripHtml(post.content).substring(0, 150) + "..."}
                 </p>
               </div>
               <div className="mt-6 pt-6 border-t border-sir-light">

@@ -17,7 +17,8 @@ export function Footer() {
     const email = formData.get("email");
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/newsletter/subscribe`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
+      const response = await fetch(`${apiUrl}/newsletter/subscribe`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export function Footer() {
           <div className="max-w-2xl mx-auto text-center">
             <h3 className="text-3xl font-display font-bold mb-4">Subscreva a nossa Newsletter</h3>
             <p className="text-sir-medium mb-8 text-lg">
-              Fique a par de todas as novidades, eventos e atividades da SIRAncorense.
+              Fique a par de todas as novidades, eventos e atividades da SIRA.
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
@@ -87,9 +88,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Column 1: Info */}
           <div>
-            <h2 className="font-display font-bold text-2xl mb-4">SIR Ancorense</h2>
+            <h2 className="font-display font-bold text-2xl mb-4">SIRA</h2>
             <p className="text-sir-medium leading-relaxed max-w-sm">
-              Sociedade de Instrução e Recreio de Vila Praia de Âncora, dedicada à cultura, música e recreação desde 1974.
+              Sociedade de Instrução e Recreio Ancorense, dedicada à cultura, música e recreação desde 1928.
             </p>
           </div>
 
@@ -115,6 +116,11 @@ export function Footer() {
               <li>
                 <Link href="/eventos" className="text-sir-medium hover:text-sir-white transition-colors">
                   Eventos
+                </Link>
+              </li>
+              <li>
+                <Link href="/noticias" className="text-sir-medium hover:text-sir-white transition-colors">
+                  Notícias
                 </Link>
               </li>
               <li>
@@ -166,7 +172,7 @@ export function Footer() {
         {/* Divider & Copyright */}
         <div className="pt-8 border-t border-sir-dark text-center">
           <p className="text-sir-medium text-sm">
-            &copy; {new Date().getFullYear()} SIRAncorense. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} SIRA. Todos os direitos reservados.
           </p>
         </div>
       </div>

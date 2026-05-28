@@ -16,7 +16,6 @@ export default async function Eventos() {
 
   return (
     <>
-      {/* @ts-expect-error async server component */}
       <BlockRenderer blocks={page.content} />
     </>
   );
