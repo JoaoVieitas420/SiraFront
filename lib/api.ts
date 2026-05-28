@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://sira-backend-7zre.onrender.com/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://sira-backend-7zre.onrender.com/api';
 
 export interface EventData {
   id: number;
