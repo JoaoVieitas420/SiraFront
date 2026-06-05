@@ -18,7 +18,6 @@ try {
 const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: backendProtocol as 'http' | 'https',
