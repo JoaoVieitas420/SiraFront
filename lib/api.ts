@@ -1,5 +1,12 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+function getApiUrl() {
+  if (!API_URL) {
+    throw new Error("❌ NEXT_PUBLIC_API_URL não está definida. Por favor, configura esta variável de ambiente na Vercel.");
+  }
+  return API_URL;
+}
+
 export interface EventData {
   id: number;
   title: string;
@@ -58,7 +65,7 @@ export interface PhotoData {
 
 export async function getEvents(): Promise<EventData[]> {
   try {
-    const res = await fetch(`${API_URL}/events`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/events`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {
@@ -69,7 +76,7 @@ export async function getEvents(): Promise<EventData[]> {
 
 export async function getEventBySlug(slug: string): Promise<EventData | null> {
   try {
-    const res = await fetch(`${API_URL}/events?slug=${slug}`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/events?slug=${slug}`, { next: { revalidate: 60 } });
     if (!res.ok) return null;
     const events = await res.json();
     return events.find((e: EventData) => e.slug === slug) || null;
@@ -81,7 +88,7 @@ export async function getEventBySlug(slug: string): Promise<EventData | null> {
 
 export async function getPosts(): Promise<PostData[]> {
   try {
-    const res = await fetch(`${API_URL}/posts`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/posts`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {
@@ -92,7 +99,7 @@ export async function getPosts(): Promise<PostData[]> {
 
 export async function getPostBySlug(slug: string): Promise<PostData | null> {
   try {
-    const res = await fetch(`${API_URL}/posts?slug=${slug}`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/posts?slug=${slug}`, { next: { revalidate: 60 } });
     if (!res.ok) return null;
     const posts = await res.json();
     return posts.find((p: PostData) => p.slug === slug) || null;
@@ -104,7 +111,7 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
 
 export async function getTeamMembers(): Promise<TeamMemberData[]> {
   try {
-    const res = await fetch(`${API_URL}/team-members`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/team-members`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {
@@ -115,7 +122,7 @@ export async function getTeamMembers(): Promise<TeamMemberData[]> {
 
 export async function getServices(): Promise<ServiceData[]> {
   try {
-    const res = await fetch(`${API_URL}/services`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/services`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {
@@ -126,7 +133,7 @@ export async function getServices(): Promise<ServiceData[]> {
 
 export async function getPhotos(): Promise<PhotoData[]> {
   try {
-    const res = await fetch(`${API_URL}/photos`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/photos`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {
@@ -234,7 +241,7 @@ export interface PageData {
 
 export async function getPages(): Promise<{ id: number; title: string; slug: string }[]> {
   try {
-    const res = await fetch(`${API_URL}/pages`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/pages`, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return res.json();
   } catch (error) {
@@ -245,7 +252,7 @@ export async function getPages(): Promise<{ id: number; title: string; slug: str
 
 export async function getPage(slug: string): Promise<PageData | null> {
   try {
-    const res = await fetch(`${API_URL}/pages/${slug}`, { next: { revalidate: 60 } });
+    const res = await fetch(`${getApiUrl()}/pages/${slug}`, { next: { revalidate: 60 } });
     if (!res.ok) return null;
     return res.json();
   } catch (error) {
