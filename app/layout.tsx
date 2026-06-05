@@ -20,7 +20,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "SIRA",
   description: "Sociedade de Instrução e Recreio Ancorense",
+  icons: {
+    icon: '/logo_sira.jpg',
+  },
 };
+
 
 export default async function RootLayout({
   children,
