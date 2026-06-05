@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "SIRA",
   description: "Sociedade de Instrução e Recreio Ancorense",
   icons: {
-    icon: '/logo_sira.jpg',
+    icon: '/favicon.jpg',
   },
 };
 

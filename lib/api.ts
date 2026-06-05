@@ -284,6 +284,10 @@ export function getResizedImageUrl(path: string | null | undefined, size: 'small
   const ext = parts.pop();
   const base = parts.join('.');
 
-  return `/storage/${base}_${size}.${ext}`;
+  const storageUrl = process.env.NEXT_PUBLIC_STORAGE_URL || '';
+  // Remove possible trailing slash just in case
+  const baseUrl = storageUrl.endsWith('/') ? storageUrl.slice(0, -1) : storageUrl;
+  
+  return `${baseUrl}/storage/${base}_${size}.${ext}`;
 }
 
