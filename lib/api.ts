@@ -288,6 +288,6 @@ export function getResizedImageUrl(path: string | null | undefined, size: 'small
   // Remove possible trailing slash just in case
   const baseUrl = storageUrl.endsWith('/') ? storageUrl.slice(0, -1) : storageUrl;
   
-  return `${baseUrl}/storage/${base}_${size}.${ext}`;
+  return `${baseUrl}/storage/${base}_${size}.webp`;
 }
 
