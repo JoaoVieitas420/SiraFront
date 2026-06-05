@@ -1,21 +1,28 @@
 import type { NextConfig } from "next";
 
-const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'https://sira-backend-7zre.onrender.com';
+const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || process.env.NEXT_PUBLIC_STORAGE_URL || 'http://localhost:8000';
+
+let backendProtocol = 'http';
+let backendHostname = 'localhost';
+let backendPort = '8000';
+
+try {
+  const url = new URL(backendUrl);
+  backendProtocol = url.protocol.replace(':', '');
+  backendHostname = url.hostname;
+  backendPort = url.port;
+} catch (e) {
+  // fallback if URL parsing fails
+}
 
 const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'sira-backend-7zre.onrender.com',
-        port: '',
-        pathname: '/storage/**',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8000',
+        protocol: backendProtocol as 'http' | 'https',
+        hostname: backendHostname,
+        port: backendPort,
         pathname: '/storage/**',
       },
     ],

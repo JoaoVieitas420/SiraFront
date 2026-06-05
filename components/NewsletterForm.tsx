@@ -14,7 +14,7 @@ export default function NewsletterForm() {
         const email = formData.get("email");
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await fetch(`${apiUrl}/newsletter/subscribe`, {
                 method: "POST",
                 headers: {

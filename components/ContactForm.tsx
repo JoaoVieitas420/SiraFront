@@ -14,7 +14,7 @@ export default function ContactForm() {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await fetch(`${apiUrl}/contact/send`, {
                 method: "POST",
                 headers: {
