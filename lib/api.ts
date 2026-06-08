@@ -214,6 +214,14 @@ export interface ContactFormBlockData {
   description?: string;
 }
 
+export interface InfoGridSocialBlockData {
+  info_title: string;
+  info_content: string;
+  info_icon?: string;
+  social_title: string;
+  social_content: string;
+}
+
 export type PageBlock =
   | { type: 'hero'; data: HeroBlockData }
   | { type: 'text'; data: TextBlockData }
@@ -224,6 +232,7 @@ export type PageBlock =
   | { type: 'team_grid'; data: TeamGridBlockData }
   | { type: 'latest_posts'; data: LatestPostsBlockData }
   | { type: 'info_grid'; data: InfoGridBlockData }
+  | { type: 'info_grid_social'; data: InfoGridSocialBlockData }
   | { type: 'map'; data: MapBlockData }
   | { type: 'info_image'; data: InfoImageBlockData }
   | { type: 'contact_form'; data: ContactFormBlockData };

@@ -1,13 +1,7 @@
 import { LucideIcon, MapPin, Clock, Phone, Mail, Info } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
-export interface InfoGridSocialBlockData {
-    info_title: string;
-    info_content: string;
-    info_icon?: string;
-    social_title: string;
-    social_content: string;
-}
+import { InfoGridSocialBlockData } from "@/lib/api";
 
 const iconMap: Record<string, LucideIcon> = {
     map: MapPin,
