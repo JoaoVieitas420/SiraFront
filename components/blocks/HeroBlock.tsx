@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { HeroBlockData } from "@/lib/api";
 
 interface HeroBlockProps {
@@ -33,12 +35,46 @@ export function HeroBlock({ data, title, subtitle, backLink, buttons }: HeroBloc
     }
   }
 
+  // Handle Background Images
+  const storageUrl = process.env.NEXT_PUBLIC_STORAGE_URL || "";
+  const formatUrl = (path: string) => path.startsWith("http") ? path : `${storageUrl}/storage/${path}`;
+
+  const defaultImages = ["/siraBg.jpg"];
+  const backgroundImages = data?.background_images && data.background_images.length > 0
+    ? data.background_images.map(formatUrl)
+    : defaultImages;
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (backgroundImages.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 6000); // Change image every 6 seconds
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+
   return (
-    <section
-      className="relative text-sir-white py-24 md:py-32 bg-cover bg-center min-h-[400px] md:min-h-[500px] flex items-center"
-      style={{ backgroundImage: "url('/siraBg.jpg')" }}
-    >
-      <div className="absolute inset-0 bg-sir-black/70" aria-hidden="true" />
+    <section className="relative text-sir-white py-24 md:py-32 min-h-[400px] md:min-h-[500px] flex items-center overflow-hidden">
+      
+      {/* Background Images Slider */}
+      {backgroundImages.map((imgUrl, index) => (
+        <div
+          key={imgUrl}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+          style={{ 
+            backgroundImage: `url('${imgUrl}')`,
+            opacity: index === currentImageIndex ? 1 : 0,
+            zIndex: 0
+          }}
+          aria-hidden="true"
+        />
+      ))}
+
+      <div className="absolute inset-0 bg-sir-black/70 z-[1]" aria-hidden="true" />
+      
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {backLink && (
           <div className="w-full flex justify-start mb-12">
@@ -59,7 +95,7 @@ export function HeroBlock({ data, title, subtitle, backLink, buttons }: HeroBloc
           <div className="flex items-center justify-center gap-4 text-sir-light/80 mb-10">
             {typeof displaySubtitle === "string" ? (
               <>
-                <p className="font-medium uppercase tracking-wider text-sm">
+                <p className="font-medium uppercase tracking-wider text-sm whitespace-pre-line">
                   {displaySubtitle}
                 </p>
               </>

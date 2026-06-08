@@ -147,6 +147,7 @@ export async function getPhotos(): Promise<PhotoData[]> {
 export interface HeroBlockData {
   title: string;
   subtitle: string;
+  background_images?: string[];
   btn1_text?: string;
   btn1_link?: string;
   btn2_text?: string;
