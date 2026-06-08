@@ -128,6 +128,16 @@ export function Footer() {
                   Contactos
                 </Link>
               </li>
+              <li>
+                <a
+                  href="https://admin.sira.pt/login/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sir-medium hover:text-sir-white transition-colors"
+                >
+                  Gestão de Sócios
+                </a>
+              </li>
             </ul>
           </div>
 
