@@ -60,7 +60,7 @@ export function HeroBlock({ data, globalImages, title, subtitle, backLink, butto
   }, [backgroundImages.length]);
 
   return (
-    <section className="relative text-sir-white py-24 md:py-32 min-h-[400px] md:min-h-[500px] flex items-center overflow-hidden">
+    <section className="relative text-sir-white min-h-[calc(100vh-80px)] flex items-end justify-center pb-24 md:pb-32 overflow-hidden">
 
       {/* Background Images Slider */}
       {backgroundImages.map((imgUrl, index) => (
@@ -124,6 +124,24 @@ export function HeroBlock({ data, globalImages, title, subtitle, backLink, butto
             ))}
           </div>
         )}
+      </div>
+
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8 text-sir-white/80"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
       </div>
     </section>
   );
