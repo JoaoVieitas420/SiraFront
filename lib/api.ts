@@ -262,6 +262,21 @@ export async function getPages(): Promise<{ id: number; title: string; slug: str
   }
 }
 
+export interface SiteSettings {
+  hero_background_images?: string[];
+}
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  try {
+    const res = await fetch(`${getApiUrl()}/settings`, { next: { revalidate: 60 } });
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching site settings:', error);
+    return null;
+  }
+}
+
 export async function getPage(slug: string): Promise<PageData | null> {
   try {
     const res = await fetch(`${getApiUrl()}/pages/${slug}`, { next: { revalidate: 60 } });

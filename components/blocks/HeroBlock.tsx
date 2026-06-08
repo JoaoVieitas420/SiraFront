@@ -6,6 +6,7 @@ import { HeroBlockData } from "@/lib/api";
 
 interface HeroBlockProps {
   data?: HeroBlockData;
+  globalImages?: string[];
   title?: string;
   subtitle?: string | ReactNode;
   backLink?: {
@@ -19,7 +20,7 @@ interface HeroBlockProps {
   }[];
 }
 
-export function HeroBlock({ data, title, subtitle, backLink, buttons }: HeroBlockProps) {
+export function HeroBlock({ data, globalImages, title, subtitle, backLink, buttons }: HeroBlockProps) {
   // Use data from CMS if provided, otherwise use direct props
   const displayTitle = title || data?.title || "";
   const displaySubtitle = subtitle || data?.subtitle;
@@ -39,10 +40,12 @@ export function HeroBlock({ data, title, subtitle, backLink, buttons }: HeroBloc
   const storageUrl = process.env.NEXT_PUBLIC_STORAGE_URL || "";
   const formatUrl = (path: string) => path.startsWith("http") ? path : `${storageUrl}/storage/${path}`;
 
-  const defaultImages = ["/siraBg.jpg"];
-  const backgroundImages = data?.background_images && data.background_images.length > 0
-    ? data.background_images.map(formatUrl)
-    : defaultImages;
+  let backgroundImages = ["/siraBg.jpg"];
+  if (data?.background_images && data.background_images.length > 0) {
+    backgroundImages = data.background_images.map(formatUrl);
+  } else if (globalImages && globalImages.length > 0) {
+    backgroundImages = globalImages.map(formatUrl);
+  }
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

@@ -1,4 +1,4 @@
-import { PageBlock } from "@/lib/api";
+import { PageBlock, getSiteSettings } from "@/lib/api";
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { TextBlock } from "@/components/blocks/TextBlock";
 import { ServicesGridBlock } from "@/components/blocks/ServicesGridBlock";
@@ -19,6 +19,8 @@ interface BlockRendererProps {
 }
 
 export async function BlockRenderer({ blocks }: BlockRendererProps) {
+  const siteSettings = await getSiteSettings();
+  const globalHeroImages = siteSettings?.hero_background_images || [];
   if (!blocks || blocks.length === 0) {
     return (
       <div className="flex items-center justify-center py-32 text-sir-medium">
@@ -32,7 +34,7 @@ export async function BlockRenderer({ blocks }: BlockRendererProps) {
       {blocks.map((block, index) => {
         switch (block.type) {
           case "hero":
-            return <HeroBlock key={index} data={block.data} />;
+            return <HeroBlock key={index} data={block.data} globalImages={globalHeroImages} />;
           case "text":
             return <TextBlock key={index} data={block.data} />;
           case "services_grid":
