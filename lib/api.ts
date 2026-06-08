@@ -220,6 +220,8 @@ export interface InfoGridSocialBlockData {
   info_icon?: string;
   social_title: string;
   social_content: string;
+  facebook_url?: string;
+  instagram_url?: string;
 }
 
 export type PageBlock =
