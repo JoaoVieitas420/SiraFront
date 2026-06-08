@@ -11,6 +11,7 @@ import { InfoGridBlock } from "@/components/blocks/InfoGridBlock";
 import { MapBlock } from "@/components/blocks/MapBlock";
 import { InfoImageBlock } from "@/components/blocks/InfoImageBlock";
 import { ContactFormBlock } from "@/components/blocks/ContactFormBlock";
+import { InfoGridSocialBlock } from "@/components/blocks/InfoGridSocialBlock";
 
 
 interface BlockRendererProps {
@@ -48,6 +49,8 @@ export async function BlockRenderer({ blocks }: BlockRendererProps) {
             return <LatestPostsBlock key={index} data={block.data} />;
           case "info_grid":
             return <InfoGridBlock key={index} data={block.data} />;
+          case "info_grid_social":
+            return <InfoGridSocialBlock key={index} data={block.data} />;
           case "map":
             return <MapBlock key={index} data={block.data} />;
           case "info_image":
