@@ -58,13 +58,13 @@ export function HeroBlock({ data, title, subtitle, backLink, buttons }: HeroBloc
 
   return (
     <section className="relative text-sir-white py-24 md:py-32 min-h-[400px] md:min-h-[500px] flex items-center overflow-hidden">
-      
+
       {/* Background Images Slider */}
       {backgroundImages.map((imgUrl, index) => (
         <div
           key={imgUrl}
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-          style={{ 
+          style={{
             backgroundImage: `url('${imgUrl}')`,
             opacity: index === currentImageIndex ? 1 : 0,
             zIndex: 0
@@ -73,8 +73,8 @@ export function HeroBlock({ data, title, subtitle, backLink, buttons }: HeroBloc
         />
       ))}
 
-      <div className="absolute inset-0 bg-sir-black/70 z-[1]" aria-hidden="true" />
-      
+      <div className="absolute inset-0 bg-sir-black/30 z-[1]" aria-hidden="true" />
+
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {backLink && (
           <div className="w-full flex justify-start mb-12">
