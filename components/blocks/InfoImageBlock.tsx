@@ -14,9 +14,9 @@ export function InfoImageBlock({ data }: { data: InfoImageBlockData }) {
     return (
         <section className="bg-sir-white py-20">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
                     {/* Text Content */}
-                    <div className="bg-sir-light p-10 rounded-lg shadow-sm">
+                    <div className="bg-sir-light p-10 rounded-lg shadow-sm flex flex-col justify-center">
                         <h2 className="font-display font-bold text-3xl text-sir-black mb-6">
                             {data.title}
                         </h2>
@@ -27,7 +27,7 @@ export function InfoImageBlock({ data }: { data: InfoImageBlockData }) {
                     </div>
 
                     {/* Image */}
-                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-md">
+                    <div className="relative aspect-[4/3] lg:aspect-auto lg:h-full rounded-lg overflow-hidden shadow-md">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={getResizedImageUrl(data.image, 'medium')}
