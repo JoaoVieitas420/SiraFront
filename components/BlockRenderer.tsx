@@ -5,6 +5,7 @@ import { ServicesGridBlock } from "@/components/blocks/ServicesGridBlock";
 import { EventsBlock } from "@/components/blocks/EventsBlock";
 import { CtaBlock } from "@/components/blocks/CtaBlock";
 import { GalleryGridBlock } from "@/components/blocks/GalleryGridBlock";
+import { FacebookGalleryGridBlock } from "@/components/blocks/FacebookGalleryGridBlock";
 import { TeamGridBlock } from "@/components/blocks/TeamGridBlock";
 import { LatestPostsBlock } from "@/components/blocks/LatestPostsBlock";
 import { InfoGridBlock } from "@/components/blocks/InfoGridBlock";
@@ -45,6 +46,8 @@ export async function BlockRenderer({ blocks }: BlockRendererProps) {
             return <CtaBlock key={index} data={block.data} />;
           case "gallery_grid":
             return <GalleryGridBlock key={index} data={block.data} />;
+          case "facebook_gallery_grid":
+            return <FacebookGalleryGridBlock key={index} data={block.data} />;
           case "team_grid":
             return <TeamGridBlock key={index} data={block.data} />;
           case "latest_posts":

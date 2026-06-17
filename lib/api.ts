@@ -179,6 +179,11 @@ export interface GalleryGridBlockData {
   heading: string;
 }
 
+export interface FacebookGalleryGridBlockData {
+  heading: string;
+  limit: number;
+}
+
 export interface TeamGridBlockData {
   heading: string;
 }
@@ -232,6 +237,7 @@ export type PageBlock =
   | { type: 'events'; data: EventsBlockData }
   | { type: 'cta'; data: CtaBlockData }
   | { type: 'gallery_grid'; data: GalleryGridBlockData }
+  | { type: 'facebook_gallery_grid'; data: FacebookGalleryGridBlockData }
   | { type: 'team_grid'; data: TeamGridBlockData }
   | { type: 'latest_posts'; data: LatestPostsBlockData }
   | { type: 'info_grid'; data: InfoGridBlockData }
