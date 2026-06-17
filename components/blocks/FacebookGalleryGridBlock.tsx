@@ -17,8 +17,8 @@ export async function FacebookGalleryGridBlock({ data }: { data: FacebookGallery
           <div className="bg-amber-50 border border-amber-200 text-amber-800 p-8 rounded-lg">
             <h3 className="font-bold text-lg mb-2">Configuração em falta</h3>
             <p>
-              A Galeria do Facebook precisa das credenciais da Meta configuradas nas variáveis de ambiente. 
-              Por favor, configure <code>FACEBOOK_PAGE_ID</code> e <code>FACEBOOK_ACCESS_TOKEN</code> no seu servidor.
+              A Galeria do Facebook precisa das credenciais da Meta configuradas nas variáveis de ambiente.
+              Por favor, configure no seu servidor.
             </p>
           </div>
         </div>
@@ -31,13 +31,13 @@ export async function FacebookGalleryGridBlock({ data }: { data: FacebookGallery
   try {
     const url = `https://graph.facebook.com/v20.0/${pageId}/photos?type=uploaded&fields=id,images,name,created_time,link&access_token=${token}&limit=${limit}`;
     const res = await fetch(url, { next: { revalidate: 3600 } }); // Cache for 1 hour
-    
+
     if (!res.ok) {
       throw new Error(`Facebook API responded with status ${res.status}`);
     }
 
     const json = await res.json();
-    
+
     if (json.data && Array.isArray(json.data)) {
       fotos = json.data.map((foto: any) => {
         // Facebook returns an array of images with different sizes
@@ -45,7 +45,7 @@ export async function FacebookGalleryGridBlock({ data }: { data: FacebookGallery
         const images = foto.images || [];
         // Sort images by width descending (largest first)
         images.sort((a: any, b: any) => b.width - a.width);
-        
+
         const largest = images[0]?.source || "";
         const medium = images.find((i: any) => i.width <= 800)?.source || largest;
         const small = images.find((i: any) => i.width <= 400)?.source || medium;
@@ -72,7 +72,7 @@ export async function FacebookGalleryGridBlock({ data }: { data: FacebookGallery
           <div className="bg-red-50 border border-red-200 text-red-800 p-8 rounded-lg">
             <h3 className="font-bold text-lg mb-2">Erro de ligação</h3>
             <p>
-              Não foi possível carregar as fotos do Facebook neste momento. 
+              Não foi possível carregar as fotos do Facebook neste momento.
               Por favor, tente novamente mais tarde ou verifique se o Token expirou.
             </p>
           </div>
@@ -92,9 +92,9 @@ export async function FacebookGalleryGridBlock({ data }: { data: FacebookGallery
             <GalleryGrid fotos={fotos} />
             {data.facebook_url && (
               <div className="mt-12 text-center">
-                <a 
-                  href={data.facebook_url} 
-                  target="_blank" 
+                <a
+                  href={data.facebook_url}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 bg-[#1877F2] hover:bg-[#166fe5] text-white font-medium rounded-lg transition-colors shadow-sm hover:shadow-md"
                 >
