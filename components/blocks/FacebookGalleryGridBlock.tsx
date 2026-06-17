@@ -1,5 +1,6 @@
 import GalleryGrid from "@/components/GalleryGrid";
 import { FacebookGalleryGridBlockData } from "@/lib/api";
+import { FaFacebook } from "react-icons/fa";
 
 export async function FacebookGalleryGridBlock({ data }: { data: FacebookGalleryGridBlockData }) {
   const pageId = process.env.FACEBOOK_PAGE_ID;
@@ -87,7 +88,22 @@ export async function FacebookGalleryGridBlock({ data }: { data: FacebookGallery
           {data.heading}
         </h2>
         {fotos.length > 0 ? (
-          <GalleryGrid fotos={fotos} />
+          <>
+            <GalleryGrid fotos={fotos} />
+            {data.facebook_url && (
+              <div className="mt-12 text-center">
+                <a 
+                  href={data.facebook_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 bg-[#1877F2] hover:bg-[#166fe5] text-white font-medium rounded-lg transition-colors shadow-sm hover:shadow-md"
+                >
+                  <FaFacebook className="w-5 h-5 mr-2" />
+                  Ver todas as fotos no Facebook
+                </a>
+              </div>
+            )}
+          </>
         ) : (
           <div className="text-center text-sir-medium">
             <p>Nenhuma foto encontrada na página do Facebook.</p>

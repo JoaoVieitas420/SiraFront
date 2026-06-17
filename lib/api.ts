@@ -182,6 +182,7 @@ export interface GalleryGridBlockData {
 export interface FacebookGalleryGridBlockData {
   heading: string;
   limit: number;
+  facebook_url?: string;
 }
 
 export interface TeamGridBlockData {
