@@ -52,13 +52,19 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             <HeroBlock
                 title={event.title}
                 subtitle={event.category}
-                backLink={{ href: "/eventos", label: "Voltar para os Eventos" }}
             />
 
             {/* Content Section */}
             <section className="bg-sir-white py-20 flex-1">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20">
+                    <div className="max-w-6xl mx-auto">
+                        <Link
+                            href="/eventos"
+                            className="inline-flex items-center text-sir-medium hover:text-sir-black transition-colors mb-8 font-semibold uppercase tracking-wider text-xs"
+                        >
+                            ← Voltar para os Eventos
+                        </Link>
+                        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
 
                         {/* Main Content */}
                         <div className="lg:w-2/3">
@@ -136,6 +142,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                                     </Link>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

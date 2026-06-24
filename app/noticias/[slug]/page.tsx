@@ -39,11 +39,17 @@ export default async function NoticiaPage({ params }: { params: Promise<{ slug: 
       <HeroBlock
         title={noticia.title}
         subtitle={formatarData(noticia.published_at)}
-        backLink={{ href: "/noticias", label: "Voltar para as Notícias" }}
       />
 
       <section className="bg-sir-white py-20 flex-1">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/noticias"
+            className="inline-flex items-center text-sir-medium hover:text-sir-black transition-colors mb-8 font-semibold uppercase tracking-wider text-xs"
+          >
+            ← Voltar para as Notícias
+          </Link>
+
           <article className="prose prose-xl max-w-none text-sir-dark leading-relaxed">
             <div 
               className="font-sans"
